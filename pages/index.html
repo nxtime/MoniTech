@@ -1,0 +1,49 @@
+<html>
+	<head>	
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/index.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="height=device-height, initial-scale=1.0">
+		<script>
+			function toggleSidebar(){
+					document.getElementById("sidebar").classList.toggle('active');
+			}
+			function toggleSideSub1(){
+					document.getElementById("sub-menu-1").classList.toggle('active-sub')
+			}			
+			function toggleSideSub2(){
+					document.getElementById("sub-menu-2").classList.toggle('active-sub')
+			}			
+		</script>
+	</head>
+	<body>
+			<div id="sidebar">	
+					<div class="toggle-btn" onclick="toggleSidebar()">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>	
+					<ul>
+						<li class="unselectable" onclick="toggleSideSub1()"><a href="#">Equipamento</a></li>
+							<ul id="sub-menu-1">
+								<li class="table space"><a href="aequip.html">Adicionar Equipamento</a></li>
+								<li class="table space"><a href="requip.html">Remover Equipamento</a></li>
+								<li class="table space"><a href="../cgi-bin/vequip.cgi">Visualizar Equipamentos</a></li>
+							</ul>
+						<li class="unselectable" onclick="toggleSideSub2()"><a href="#">Administrar Usuários</a></li>
+							<ul id="sub-menu-2">
+								<li class="table space"><a href="aduser.html">Adicionar Usuário</a></li>
+								<li class="table space"><a href="rmuser.html">Remover Usuário</a></li>
+								<li class="table space"><a href="../cgi-bin/vuser.cgi">Visualizar Usuários</a></li>
+								<li class="table space"><a href="cpass.html">Alterar Senha</a></li>
+							</ul>
+						<li class="table"><a href="../pages/aus.html">Sobre nós</a></li>
+						<li class="table"><a href="../pages/doc.html">Documentação</a></li>
+						<li class="table"><a href="../pages/supv.html">
+						<label for="mequip"><form action="./index.cgi" method="post"><input name="algo" type="hidden" value="/var/www/html/pages/sup.html"><input type="submit" id="mequip" class="hidden" value="enviar"></form>Suporte
+						</label></a></li>
+						<li class="logout" id="Logout"><a href="../cgi-bin/logout.cgi"><img src="../images/logout-logo.png" width="40px"></a></li>
+					<ul>
+			</div>
+  </body>
+</html>
