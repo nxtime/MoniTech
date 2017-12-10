@@ -18,17 +18,20 @@ if [[ $IP == $CIP ]] ; then
 	if [[ $INF != "" ]] ; then
 		if [[ $INF == $CINF ]] ; then
 			if [[ $TYPE == "name" ]] ; then
-				sed -i "/^$IP;/ s/^$F1;/$INF;/g"
+				sed -i "/^$IP;/ s/^$F1;/$INF;/g" equips.csv > equips.new
+				mv equips.new equips.csv
 				echo "$(date);$IP;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/equip.txt
 				echo "alert('Equipamento alterado.');"
 				echo "location.href='../index.html'"
 			elif [[ $TYPE == "local" ]] ; then
-				sed -i "/^$IP;/ s/;$F2;/;$INF;/g"
+				sed -i "/^$IP;/ s/;$F2;/;$INF;/g" equips.csv > equips.new
+				mv equips.new equips.csv
 				echo "$(date);$IP;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/equip.txt
 				echo "alert('Equipamento alterado.');"
 				echo "location.href='../index.html'"
 			elif [[ $TYPE == "ip" ]] ; then
-				sed -i "/^$IP;/ s/;$F3$/;$INF/g"
+				sed -i "/^$IP;/ s/;$F3$/;$INF/g" equips.csv > equips.new
+				mv equips.new equips.csv
 				echo "$(date);$IP;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/equip.txt
 				echo "alert('Equipamento alterado.');"
 				echo "location.href='../index.html'"

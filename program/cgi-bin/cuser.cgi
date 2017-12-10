@@ -19,23 +19,27 @@ if [[ $USER == $CUSER ]] ; then
 	if [[ $INF != "" ]] ; then
 		if [[ $INF == $CINF ]] ; then
 			if [[ $TYPE == "user" ]] ; then
-				sed -i "/^$USER;/ s/^$F1;/$INF;/g"
+				sed -i "/^$USER;/ s/^$F1;/$INF;/g" users.csv > users.new
+				mv users.new users.csv
 				echo "$(date);$USER;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/user.txt
 				echo "alert('Usuário alterado.');"
 				echo "location.href='../index.html'"
 			elif [[ $TYPE == "pass" ]] ; then
 				INF=$(echo "$INF" | sha256sum | cut -d" " -f1)
-				sed -i "/^$USER;/ s/;$F2;/;$INF;/g"
+				sed -i "/^$USER;/ s/;$F2;/;$INF;/g" users.csv > users.new
+				mv users.new users.csv
 				echo "$(date);$USER;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/user.txt
 				echo "alert('Usuário alterado.');"
 				echo "location.href='../index.html'"
 			elif [[ $TYPE == "e-mail" ]] ; then
-				sed -i "/^$USER;/ s/;$F3;/;$INF;/g"
+				sed -i "/^$USER;/ s/;$F3;/;$INF;/g" users.csv > users.new
+				mv users.new users.csv
 				echo "$(date);$USER;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/user.txt
 				echo "alert('Usuário alterado.');"
 				echo "location.href='../index.html'"
 			elif [[ $TYPE == "type" ]] ; then
-				sed -i "/^$USER;/ s/;$F4;/;$INF;/g"
+				sed -i "/^$USER;/ s/;$F4;/;$INF;/g" users.csv > users.new
+				mv users.new users.csv
 				echo "$(date);$USER;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/user.txt
 				echo "alert('Usuário alterado.');"
 				echo "location.href='../index.html'"

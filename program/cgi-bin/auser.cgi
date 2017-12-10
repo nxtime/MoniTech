@@ -18,5 +18,29 @@ CEMAILA=$(echo $VAR | cut -d"&" -f6 | cut -d"=" -f2 | tr + ' ' | urldecode)
 
 echo "<script lang=javascript>"
 grep "^$USER;" users.csv> /dev/null
-[[ $? != "0" ]] && [[ $TYPE != "" ]] && [[ $USER != "" ]] && [[ $PASS != "" ]] && [[ $CPASS != "" ]] && [[ $EMAILA != "" ]] && [[ $CEMAILA != "" ]] && [[ $PASS == $CPASS ]] && [[ $EMAILA == $CEMAILA ]] && echo "$USER;$PASS;$EMAILA;$TYPE;IP;nlogged" >> users.csv && echo "$(date);$USER;ADDED" >> log/user.txt && echo "alert('Usuário adicionado.');" && echo "location.href='../index.html'" || echo "alert('Campos não coincidem-se.');" ; echo "location.href='../index.html'"
+if [[ $? != "0" ]] ; then
+	if [[ $TYPE != "" ]] ; then
+		if [[ $USER != "" ]] ; then
+			if [[ $PASS != "" ]] ; then
+				if [[ $CPASS != "" ]] ; then
+					if [[ $EMAILA != "" ]] ; then
+						if [[ $CEMAILA != "" ]] ; then
+							if [[ $PASS == $CPASS ]] ; then
+								if [[ $EMAILA == $CEMAILA ]] ; then
+									echo "$USER;$PASS;$EMAILA;$TYPE;IP;nlogged" >> users.csv
+									echo "$(date);$USER;ADDED" >> log/user.txt
+									echo "alert('Usuário adicionado.')"
+									echo "location.href='../index.html'"
+								fi
+							fi
+						fi
+					fi
+				fi
+			fi
+		fi
+	fi
+else
+	echo "alert('Campos não coincidem-se.')"
+	echo "location.href='../index.html'"
+fi
 echo "</script>"

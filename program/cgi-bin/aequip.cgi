@@ -16,5 +16,23 @@ CIP=$(echo $VAR | cut -d"&" -f4 | cut -d"=" -f2)
 
 echo "<script lang=javascript>"
 grep "^$EQUIP;" equips.csv> /dev/null
-[[ $? != "0" ]] && [[ $EQUIP != "" ]] && [[ $LOCAL != "" ]] && [[ $IP != "" ]] && [[ $CIP != "" ]] && [[ $IP == $CIP ]] && echo "$EQUIP;$LOCAL;$IP" >> equips.csv &&echo "$(date);$EQUIP;ADD" >> log/equip.txt && echo "alert('Equipamento adicionado.');" && echo "location.href='../index.html'" || echo "alert('Campos não coincidem-se.');" ; echo "location.href='../index.html'"
+if [[ $? != "0" ]] ; then
+	if [[ $EQUIP != "" ]] ; then
+		if [[ $LOCAL != "" ]] ; then
+			if [[ $IP != "" ]] ; then
+				if [[ $CIP != "" ]] ; then
+					if [[ $IP == $CIP ]] ; then
+						echo "$EQUIP;$LOCAL;$IP" >> equips.csv
+						echo "$(date);$EQUIP;ADD" >> log/equip.txt
+						echo "alert('Equipamento adicionado.')"
+						echo "location.href='../index.html'"
+					fi
+				fi
+			fi
+		fi
+	fi
+else
+	echo "alert('Campos não coincidem-se.')"
+	echo "location.href='../index.html'"
+fi
 echo "</script>"

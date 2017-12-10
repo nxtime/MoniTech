@@ -15,7 +15,7 @@ echo "<script lang='javascript'>"
 case $VAR in
 	Iniciar)
 		while : ; do
-			ping.cgi &> /dev/null
+			ping.cgi &
 			echo "$!"> /usr/lib/cgi-bin/log/pid.txt
 		done
 		echo "alert('Monitoramento iniciado.');"

@@ -10,10 +10,12 @@ CUSER=$(echo $VAR | cut -d"&" -f2 | cut -d"=" -f2)
 
 echo "<script lang='javascript'>"
 if [[ $USER == $CUSER ]] ; then
-	sed "/^$USER;/d" users.csv
-	echo "$(date);$USER;REMOVED" >> /usr/lib/cgi-bin/log/user.txt
-	echo "alert('Usuário removido.')"
+	grep -v "^$USER;" users.csv > users.new
+	mv users.new users.csv
+	echo "alert('Usuário removido.');"
 	echo "location.href='../index.html'"
 else
+	echo "alert('Campos não coincidem-se.');"
+	echo "location.href='../index.html'"
 fi
 echo "</script>"
