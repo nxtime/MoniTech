@@ -1,0 +1,115 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+body {
+	color: #DCDCDC;
+	background-color: #000000;
+}
+
+label {
+	cursor: pointer;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: 235px;
+}
+
+ul li {
+	position: relative;
+}
+
+li ul {
+	position: absolute;
+	left: 235px;
+	top: 0px;
+	display: none;
+}
+
+ul li a {
+	display: block;
+	text-decoration: none;
+	color: #DCDCDC;
+	background: #696969;
+	padding: 5px;
+	border: 1px none #696969;
+}
+
+li:hover ul {
+	display: block;
+}
+
+ul li a:hover {
+	text-decoration: underline;
+	font-weight: bold;
+	background: #C0C0C0;
+}
+
+#sidebar {
+	position: fixed;
+	width: 235px;
+	background-color: #696969;
+	height: 100%;
+	left: -235px;
+	transition: all .5s;
+}
+
+#sidebar.active {
+	left: 0px;
+}
+
+#sidebar .toggle-btn {
+	position: absolute;
+	left: 245px;
+	top: 10px;
+	transition: all 0.5s;
+}
+
+#sidebar .toggle-btn:hover {
+	transform: scale(1.05);
+	cursor: pointer;
+}
+
+#sidebar .toggle-btn span {
+	display: block;
+	width: 30px;
+	height: 5px;
+	background: #DCDCDC;
+	border-radius: 10px;
+	margin: 5px 0px;
+}
+
+#table-menu {
+	position: absolute;
+	top: 20px;
+	left: 500px;
+}
+
+#table-menu table {
+	border-collapse: collapse;
+	width: 800px;
+}
+
+#table-menu td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+#table-menu tr:nth-child(even) {
+	background color: #dddddd;
+}
+
+#table-menu input {
+	left: 100px;
+}
+
+.hidden {
+	display: none;
+	visibility: hidden;
+}

@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../css/form.css">
+	</head>
+	<body>
+		<form method="POST" action="../cgi-bin/aduser.cgi">
+			<h2>Adicionar Usuário</h2>
+			<select name="type">
+				<option selected disabled>Escolha o tipo de usúario:</option>
+				<option value="comum" name="user">Comum</option>
+				<option value="tecnico" name="user">Técnico</option>
+			</select><br>
+			<input type="text" name="usern" placeholder="Nome de usuário."><br>
+			<input type="email" name="email" placeholder="E-mail do usuário."><br>
+			<input type="email" name="cmail" placeholder="Confirme o e-mail."><br>
+			<input type="password" name="passw" placeholder="Senha do usuário."><br>
+			<input type="password" name="cpass" placeholder="Confirme a senha."><br><br>
+			<input type="submit" value="Adicionar">
+			<input type="submit" value="Retornar" formaction="auser.html">
+		</form>
+	</body>
+</html>
