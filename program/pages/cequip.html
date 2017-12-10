@@ -1,0 +1,12 @@
+		<h2>Alterar informação</h2><br>
+			<form action="../cgi-bin/cequip.cgi" method="POST">
+			<select name="type">
+				<option disabled selected>Selecione o campo a ser alterado:</option>
+				<option value="name">Nome do equipamento</option>
+				<option value="local">Localização do equipamento</option>
+				<option value="ip">Endereço de IP</option>
+			</select><br><br>
+			<input type="text" name="inf" placeholder="informação a ser alterada"><br>
+			<input type="text" name="cinf" placeholder="confirme a informação"><br><br>
+			<input type="submit" value="Change">
+		</form>
