@@ -12,6 +12,7 @@ echo "<script lang='javascript'>"
 if [[ $USER == $CUSER ]] ; then
 	grep -v "^$USER;" users.csv > users.new
 	mv users.new users.csv
+	echo "$(date);$USER;REMOVED" >> user.log
 	echo "alert('Usuário removido.');"
 	echo "location.href='../index.html'"
 else

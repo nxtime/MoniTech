@@ -16,7 +16,7 @@ echo "<script lang='javascript'>"
 if [[ $IP == $CIP ]] ; then
 	grep -v ";$IP$" equips.csv > equips.new
 	mv equips.new equips.csv
-	echo "$(date);$IP;REMOVED" >> /usr/lib/cgi-bin/log/equip.txt
+	echo "$(date);$IP;REMOVED" >> equip.log
 	echo "alert ('Equipamento removido.');"
 	echo "location.href='../index.html'"
 else

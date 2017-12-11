@@ -28,7 +28,7 @@ if [[ $? != "0" ]] ; then
 							if [[ $PASS == $CPASS ]] ; then
 								if [[ $EMAILA == $CEMAILA ]] ; then
 									echo "$USER;$PASS;$EMAILA;$TYPE;IP;nlogged" >> users.csv
-									echo "$(date);$USER;ADDED" >> log/user.txt
+									echo "$(date);$USER;ADDED" >> user.log
 									echo "alert('Usuário adicionado.')"
 									echo "location.href='../index.html'"
 								fi

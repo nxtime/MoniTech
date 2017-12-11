@@ -7,6 +7,11 @@ echo
 
 VAR=$(echo $VAR | cut -d"=" -f2)
 
+iniciar(){
+	source pingd.cgi
+	echo $! > serv.pid
+}
+
 echo "<html>"
 echo "<head>"
 echo "</head>"
@@ -14,29 +19,22 @@ echo "<body>"
 echo "<script lang='javascript'>"
 case $VAR in
 	Iniciar)
-		while : ; do
-			ping.cgi &
-			echo "$!"> /usr/lib/cgi-bin/log/pid.txt
-		done
+		iniciar &> /dev/null
 		echo "alert('Monitoramento iniciado.');"
 		echo "location.href='../index.html'"
 		;;
 	Encerrar)
-		kill -9 $(cat /usr/lib/cgi-bin/log/pid.txt)
-		rm -rf /usr/lib/cgi-bin/log/pid.txt
+		kill -9 $(cat serv.pid)
+		rm -rf serv.pid
 		echo "alert('Monitoramento encerrado.');"
 		echo "location.href='../index.html'"
 		;;
-	Reiniciar)
-		$0 Encerrar
-		$0 Iniciar
-		;;
 	Status)
-		if [ -e /usr/lib/cgi-bin/log/pid.txt ] ; then
-			echo "alert('Monitoramento está em funcionamento. PID=$(cat /usr/lib/cgi-bin/log/pid.txt)')"
+		if [ -e serv.pid ] ; then
+			echo "alert ('Monitoramento está em funcionamento. PID=$(cat serv.pid)');"
 			echo "location.href='../index.html'"
 		else
-			echo "alert('Monitoramento está desligado.')"
+			echo "alert ('Monitoramento está desligado.');"
 			echo "location.href='../index.html'"
 		fi
 		;;

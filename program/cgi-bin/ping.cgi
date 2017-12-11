@@ -1,21 +1,18 @@
 #!/bin/bash
+IFS=$'\n'
 
-echo "content-type: text/html"
-echo
-
-IP=$REMOTE_ADDR
-
-echo ""> rsimple.txt
+echo ""> rsimple.log
 for name in $(cat equips.csv | cut -d";" -f1) ; do
-	for ip in $(grep "^$name;" equips.csv | cut -d";" -f3) ; do
-		ping -W 1 -c 1 -i 1 $ip &> /dev/null
-		local=$(grep "^$name;" equips.csv | cut -d";" -f2)
-		if [[ $? == "0" ]] ; then
-			echo "$(date);$name;$local;$ip;UP" >> log/rdetails.txt
-			echo "$name;$local;$ip;UP" >> log/rsimple.txt
-		else
-			echo "$(date);$name;$local;$ip;DOWN" >> log/rdetails.txt
-			echo "$name;$local;$ip;DOWN" >> log/rsimple.txt
-		fi
+	for location in $(grep "^$name;" equips.csv | cut -d";" -f2) ; do	
+		for ip in $(grep "^$name;" equips.csv | cut -d";" -f3) ; do
+			ping -W 1 -c 1 -i 1 $ip &> /dev/null
+			if [[ $? == "0" ]] ; then
+				echo "$(date);$name;$location;$ip;UP" >> rdetail.log
+				echo "$name;$location;$ip;UP" >> rsimple.log
+			else
+				echo "$(date);$name;$location;$ip;DOWN" >> rdetail.log
+				echo "$name;$location;$ip;DOWN" >> rsimple.log
+			fi
+		done
 	done
 done

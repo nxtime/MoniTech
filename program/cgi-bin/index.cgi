@@ -12,7 +12,6 @@ MENUC=/var/www/html/pages/common.html
 LOGIN=/var/www/html/pages/login.html
 TYPE=$(grep ";$IP;" users.csv | cut -d";" -f4)
 STATE=$(grep ";$IP;" users.csv | cut -d";" -f6)
-PART=$(grep ";$IP;" users.csv | cut -d";" -f7)
 
 grep ";$IP;" users.csv> /dev/null
 
@@ -31,14 +30,6 @@ if [[ $? == "0" ]] ; then
 				echo "</script>"
 				echo "</head>"
 				echo "<body>"
-				echo "<div id=\"sidebar\">"
-				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "</div>"
-				cat "$MENUA"
-				echo "</div>"
 				echo "<div id=\"table-menu\">"
 				echo "<table>"
 				echo "<tr>"
@@ -60,6 +51,14 @@ if [[ $? == "0" ]] ; then
 				done
 				echo "</table>"
 				echo "</div>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUA"
+				echo "</div>"
 				echo "</body>"
 				echo "</html>"
 			elif [[ $REDIRECT == "/usr/lib/cgi-bin/vuser.cgi" ]] ; then
@@ -74,14 +73,6 @@ if [[ $? == "0" ]] ; then
 				echo "</script>"
 				echo "</head>"
 				echo "<body>"
-				echo "<div id=\"sidebar\">"
-				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "</div>"
-				cat "$MENUA"
-				echo "</div>"
 				echo "<div id=\"table-menu\">"
 				echo "<table>"
 				echo "<tr>"
@@ -100,6 +91,14 @@ if [[ $? == "0" ]] ; then
 				done
 				echo "</table>"
 				echo "</div>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUA"
+				echo "</div>"
 				echo "</body>"
 				echo "</html>"
 			elif [[ $REDIRECT == "/usr/lib/cgi-bin/log/equip.cgi" ]] ; then 
@@ -114,27 +113,20 @@ if [[ $? == "0" ]] ; then
 				echo "</script>"
 				echo "</head>"
 				echo "<body>"
-				echo "<div id=\"sidebar\">"
-				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "</div>"
-				cat "$MENUA"
-				echo "</div>"
 				echo "<div id=\"table-menu\">"
 				echo "<table>"
 				echo "<tr>"
-				echo "<th>Nome:</th>"
+				echo "<th>IP:</th>"
 				echo "<th>Ação:</th>"
 				echo "<th>Data e hora:</th>"
 				echo "</tr>"
-				for x in $(cat /usr/lib/cgi-bin/log/equip.txt) ; do
+					
+				for x in $(tail -n15 equip.log | tac) ; do
 					echo "<tr>"
 					for y in $(echo $x) ; do
-						NAME=$(echo $y | cut -d";" -f1)
-						ACT=$(echo $y | cut -d";" -f2)
-						DATE=$(echo $y | cut -d";" -f3)
+						NAME=$(echo $y | cut -d";" -f2)
+						ACT=$(echo $y | cut -d";" -f3)
+						DATE=$(echo $y | cut -d";" -f1)
 						echo "<td>$NAME</td>"
 						echo "<td>$ACT</td>"
 						echo "<td>$DATE</td>"
@@ -142,6 +134,14 @@ if [[ $? == "0" ]] ; then
 					echo "</tr>"
 				done
 				echo "</table>"
+				echo "</div>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUA"
 				echo "</div>"
 				echo "</body>"
 				echo "</html>"
@@ -157,14 +157,6 @@ if [[ $? == "0" ]] ; then
 				echo "</script>"
 				echo "</head>"
 				echo "<body>"
-				echo "<div id=\"sidebar\">"
-				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "</div>"
-				cat "$MENUA"
-				echo "</div>"
 				echo "<div id=\"table-menu\">"
 				echo "<table>"
 				echo "<tr>"
@@ -172,20 +164,27 @@ if [[ $? == "0" ]] ; then
 				echo "<th>Ação:</th>"
 				echo "<th>Data e hora:</th>"
 				echo "</tr>"
-				for x in $(cat /usr/lib/cgi-bin/log/user.txt) ; do
+				for x in $(tail -n15 user.log | tac) ; do
 					echo "<tr>"
 					for y in $(echo $x) ; do
-						NAME=$(echo $y | cut -d";" -f1)
-						ACT=$(echo $y | cut -d";" -f2)
-						DATE=$(echo $y | cut -d";" -f3)
+						NAME=$(echo $y | cut -d";" -f2)
+						ACT=$(echo $y | cut -d";" -f3)
+						DATE=$(echo $y | cut -d";" -f1)
 						echo "<td>$NAME</td>"
-						echo "<td>$EMAIL</td>"
 						echo "<td>$ACT</td>"
 						echo "<td>$DATE</td>"
 					done
 					echo "</tr>"
 				done
 				echo "</table>"
+				echo "</div>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUA"
 				echo "</div>"
 				echo "</body>"
 				echo "</html>"
@@ -201,14 +200,6 @@ if [[ $? == "0" ]] ; then
 				echo "</script>"
 				echo "</head>"
 				echo "<body>"
-				echo "<div id=\"sidebar\">"
-				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "</div>"
-				cat "$MENUA"
-				echo "</div>"
 				echo "<div id=\"table-menu\">"
 				echo "<table>"
 				echo "<tr>"
@@ -216,12 +207,12 @@ if [[ $? == "0" ]] ; then
 				echo "<th>Ação:</th>"
 				echo "<th>Data e hora:</th>"
 				echo "</tr>"
-				for x in $(cat /usr/lib/cgi-bin/log/login.txt) ; do
+				for x in $(tail -n15 login.log | tac) ; do
 					echo "<tr>"
 					for y in $(echo $x) ; do
-						NAME=$(echo $y | cut -d";" -f1)
-						ACT=$(echo $y | cut -d";" -f2)
-						DATE=$(echo $y | cut -d";" -f3)
+						NAME=$(echo $y | cut -d";" -f2)
+						ACT=$(echo $y | cut -d";" -f3)
+						DATE=$(echo $y | cut -d";" -f1)
 						echo "<td>$NAME</td>"
 						echo "<td>$ACT</td>"
 						echo "<td>$DATE</td>"
@@ -229,6 +220,14 @@ if [[ $? == "0" ]] ; then
 					echo "</tr>"
 				done
 				echo "</table>"
+				echo "</div>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUA"
 				echo "</div>"
 				echo "</body>"
 				echo "</html>"
@@ -252,7 +251,9 @@ if [[ $? == "0" ]] ; then
 				echo "</div>"
 				cat "$MENUA"
 				echo "</div>"
+				echo "<div id='interface'>"
 				cat $REDIRECT
+				echo "</div>"
 			elif [[ $REDIRECT == "/var/www/html/pages/requip.html" ]] ; then
 				echo "<!DOCTYPE html>"
 				echo "<html>"
@@ -458,14 +459,6 @@ if [[ $? == "0" ]] ; then
 				echo "</script>"
 				echo "</head>"
 				echo "<body>"
-				echo "<div id=\"sidebar\">"
-				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "</div>"
-				cat "$MENUA"
-				echo "</div>"
 				echo "<div id=\"table-menu\">"
 				echo "<table>"
 				echo "<tr>"
@@ -475,7 +468,7 @@ if [[ $? == "0" ]] ; then
 				echo "<th>Endereço de IP:</th>"
 				echo "<th>Status:</th>"
 				echo "</tr>"
-				for x in $(cat /usr/lib/cgi-bin/log/rdetail.txt) ; do
+				for x in $(cat rdetail.log) ; do
 					echo "<tr>"
 					for y in $(echo $x) ; do
 						DATE=$(echo $y | cut -d";" -f1)
@@ -493,6 +486,14 @@ if [[ $? == "0" ]] ; then
 				done
 				echo "</table>"
 				echo "</div>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUA"
+				echo "</div>"
 				echo "</body>"
 				echo "</html>"
 			else
@@ -507,19 +508,10 @@ if [[ $? == "0" ]] ; then
 				echo "</script>"
 				echo "</head>"
 				echo "<body>"
-				echo "<div id=\"sidebar\">"
-				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "<span class=\"span\"></span>"
-				echo "</div>"
-				cat "$MENUA"
-				echo "</div>"
 				echo "<div id=\"table-menu\">"
 				echo "<form method='POST'>"
  				echo "<input type='submit' name='var' value='Iniciar' formaction='serv.cgi'>"
 				echo "<input type='submit' name='var' value='Encerrar' formaction='serv.cgi'>"
-				echo "<input type='submit' name='var' value='Reiniciar' formaction='serv.cgi'>"
 				echo "<input type='submit' name='var' value='Status' formaction='serv.cgi'>"
 				echo "<input type='submit' name='var' value='Atualizar' formaction='index.cgi'>"
 				echo "<input type='submit' name='var' value='Detalhes' formaction='index.cgi'>"
@@ -531,7 +523,7 @@ if [[ $? == "0" ]] ; then
 				echo "<th>Endereço de IP:</th>"
 				echo "<th>Status:</th>"
 				echo "</tr>"
-				for x in $(cat /usr/lib/cgi-bin/log/rsimple.txt) ; do
+				for x in $(cat rsimple.log) ; do
 					echo "<tr>"
 					for y in $(echo $x) ; do
 						NAME=$(echo $y | cut -d";" -f1)
@@ -548,6 +540,14 @@ if [[ $? == "0" ]] ; then
 				echo "</table>"
 				echo "</form>"
 				echo "</div>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUA"
+				echo "</div>"
 				echo "</body>"
 				echo "</html>"
 			fi
@@ -559,7 +559,7 @@ if [[ $? == "0" ]] ; then
 					echo "<link rel='stylesheet' type='text/css' href='../css/index.css'>" 
 					echo "<script>"
 					echo "function toggleSidebar(){"
-					echo "document.getElementById("sidebar").classList.toggle('active');"
+					echo "document.getElementById(\"sidebar\").classList.toggle('active');"
 					echo "}"
 					echo "</script>"
 					echo "</head>"
@@ -602,7 +602,7 @@ if [[ $? == "0" ]] ; then
 					echo "<link rel='stylesheet' type='text/css' href='../css/index.css'>" 
 					echo "<script>"
 					echo "function toggleSidebar(){"
-					echo "document.getElementById("sidebar").classList.toggle('active');"
+					echo "document.getElementById(\"sidebar\").classList.toggle('active');"
 					echo "}"
 					echo "</script>"
 					echo "</head>"
@@ -624,7 +624,7 @@ if [[ $? == "0" ]] ; then
 					echo "<th>Endereço de IP:</th>"
 					echo "<th>Status:</th>"
 					echo "</tr>"
-					for x in $(cat /usr/lib/cgi-bin/log/rdetail.txt) ; do
+					for x in $(cat rdetail.log) ; do
 						echo "<tr>"
 						for y in $(echo $x) ; do
 							DATE=$(echo $y | cut -d";" -f1)
@@ -651,7 +651,7 @@ if [[ $? == "0" ]] ; then
 					echo "<link rel='stylesheet' type='text/css' href='../css/index.css'>" 
 					echo "<script>"
 					echo "function toggleSidebar(){"
-					echo "document.getElementById("sidebar").classList.toggle('active');"
+					echo "document.getElementById(\"sidebar\").classList.toggle('active');"
 					echo "}"
 					echo "</script>"
 					echo "</head>"
@@ -669,6 +669,69 @@ if [[ $? == "0" ]] ; then
 					echo "<script>"
 					echo "location.href='../index.html'"
 					echo "</script>"
+			elif [[ $REDIRECT == "/var/www/html/pages/aequip.html" ]] ; then
+				echo "<!DOCTYPE html>"
+				echo "<html>"
+				echo "<head>"
+				echo "<link rel='stylesheet' type='text/css' href='../css/index.css'>" 
+				echo "<script>"
+				echo "function toggleSidebar(){"
+				echo "document.getElementById(\"sidebar\").classList.toggle('active');"
+				echo "}"
+				echo "</script>"
+				echo "</head>"
+				echo "<body>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUC"
+				echo "</div>"
+				cat $REDIRECT
+			elif [[ $REDIRECT == "/var/www/html/pages/requip.html" ]] ; then
+				echo "<!DOCTYPE html>"
+				echo "<html>"
+				echo "<head>"
+				echo "<link rel='stylesheet' type='text/css' href='../css/index.css'>" 
+				echo "<script>"
+				echo "function toggleSidebar(){"
+				echo "document.getElementById(\"sidebar\").classList.toggle('active');"
+				echo "}"
+				echo "</script>"
+				echo "</head>"
+				echo "<body>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUC"
+				echo "</div>"
+				cat $REDIRECT
+			elif [[ $REDIRECT == "/var/www/html/pages/cequip.html" ]] ; then
+				echo "<!DOCTYPE html>"
+				echo "<html>"
+				echo "<head>"
+				echo "<link rel='stylesheet' type='text/css' href='../css/index.css'>" 
+				echo "<script>"
+				echo "function toggleSidebar(){"
+				echo "document.getElementById(\"sidebar\").classList.toggle('active');"
+				echo "}"
+				echo "</script>"
+				echo "</head>"
+				echo "<body>"
+				echo "<div id=\"sidebar\">"
+				echo "<div class=\"toggle-btn\" onclick=\"toggleSidebar()\">"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "<span class=\"span\"></span>"
+				echo "</div>"
+				cat "$MENUC"
+				echo "</div>"
+				cat $REDIRECT
 				else
 					echo "<!DOCTYPE html>"
 					echo "<html>"
@@ -676,7 +739,7 @@ if [[ $? == "0" ]] ; then
 					echo "<link rel='stylesheet' type='text/css' href='../css/index.css'>" 
 					echo "<script>"
 					echo "function toggleSidebar(){"
-					echo "document.getElementById("sidebar").classList.toggle('active');"
+					echo "document.getElementById(\"sidebar\").classList.toggle('active');"
 					echo "}"
 					echo "</script>"
 					echo "</head>"
@@ -693,7 +756,6 @@ if [[ $? == "0" ]] ; then
 					echo "<form method='POST'>"
 					echo "<input type='submit' name='var' value='Iniciar' formaction='serv.cgi'>"
 					echo "<input type='submit' name='var' value='Encerrar' formaction='serv.cgi'>"
-					echo "<input type='submit' name='var' value='Reiniciar' formaction='serv.cgi'>"
 					echo "<input type='submit' name='var' value='Status' formaction='serv.cgi'>"
 					echo "<input type='submit' name='var' value='Atualizar' formaction='index.cgi'>"
 					echo "<input type='submit' name='var' value='Detalhes' formaction='index.cgi'>"
@@ -705,7 +767,7 @@ if [[ $? == "0" ]] ; then
 					echo "<th>Endereço de IP:</th>"
 					echo "<th>Status:</th>"
 					echo "</tr>"
-					for x in $(cat /usr/lib/cgi-bin/log/rsimple.txt) ; do
+					for x in $(cat rsimple.log) ; do
 						echo "<tr>"
 						for y in $(echo $x) ; do
 							NAME=$(echo $y | cut -d";" -f1)

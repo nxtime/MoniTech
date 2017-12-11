@@ -14,11 +14,15 @@ CPASS=$(grep "^$USER;" users.csv | cut -d";" -f2)
 echo "<script lang=javascript>"
 if [[ $USER == $CUSER ]] ; then
 	if [[ $PASS == $CPASS ]] ; then
-		sed -i "/^$USER;/ s/nlogged/logged/g" users.csv > users.new
+		grep -v "^$USER;" users.csv > users.new
+		grep "^$USER;" users.csv | sed "s/nlogged/logged/g" >> users.new
 		mv users.new users.csv
-		sed -i "/^$USER;/ s/IP/$IP/g" users.csv > users.new
+		chmod 777 users.csv
+		grep -v "^$USER;" users.csv > users.new
+		grep "^$USER;" users.csv | sed "s/IP/$IP/g" >> users.new
 		mv users.new users.csv
-		echo "$(date);$USER;ON" >> /usr/lib/cgi-bin/log/login.txt
+		chmod 777 users.csv
+		echo "$(date);$USER;ON" >> login.log
 		echo "location.href='../index.html';"
 	else
 		echo "alert('Usuário/senha incorreto, por favor tente novamente.');"

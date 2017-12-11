@@ -15,32 +15,41 @@ F2=$(grep "^$USER;" users.csv | cut -d";" -f2)
 F3=$(grep "^$USER;" users.csv | cut -d";" -f3)
 F4=$(grep "^$USER;" users.csv | cut -d";" -f4)
 
+echo "<script lang=javascript>"
 if [[ $USER == $CUSER ]] ; then
 	if [[ $INF != "" ]] ; then
 		if [[ $INF == $CINF ]] ; then
 			if [[ $TYPE == "user" ]] ; then
-				sed -i "/^$USER;/ s/^$F1;/$INF;/g" users.csv > users.new
+				grep -v "^$USER;" users.csv > users.new
+				grep "^$USER;" users.csv | sed -e "s/^$F1;/$INF;/g" >> users.new
 				mv users.new users.csv
-				echo "$(date);$USER;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/user.txt
+				chmod 777 users.csv
+				echo "$(date);$USER;CHANGED" >> user.log
 				echo "alert('Usuário alterado.');"
 				echo "location.href='../index.html'"
 			elif [[ $TYPE == "pass" ]] ; then
 				INF=$(echo "$INF" | sha256sum | cut -d" " -f1)
-				sed -i "/^$USER;/ s/;$F2;/;$INF;/g" users.csv > users.new
+				grep -v "^$USER;" users.csv > users.new
+				grep "^$USER;" users.csv | sed -e "s/;$F2;/;$INF;/g" >> users.new
 				mv users.new users.csv
-				echo "$(date);$USER;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/user.txt
+				chmod 777 users.csv
+				echo "$(date);$USER;CHANGED" >> user.log
 				echo "alert('Usuário alterado.');"
 				echo "location.href='../index.html'"
 			elif [[ $TYPE == "e-mail" ]] ; then
-				sed -i "/^$USER;/ s/;$F3;/;$INF;/g" users.csv > users.new
+				grep -v "^$USER;" users.csv > users.new
+				grep "^$USER;" users.csv | sed -e "s/;$F3;/;$INF;/g" >> users.new
 				mv users.new users.csv
-				echo "$(date);$USER;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/user.txt
+				chmod 777 users.csv
+				echo "$(date);$USER;CHANGED" >> user.log
 				echo "alert('Usuário alterado.');"
 				echo "location.href='../index.html'"
 			elif [[ $TYPE == "type" ]] ; then
-				sed -i "/^$USER;/ s/;$F4;/;$INF;/g" users.csv > users.new
+				grep -v "^$USER;" users.csv > users.new
+				grep "^$USER;" users.csv | sed -e "s/;$F4$/;$INF/g" >> users.new
 				mv users.new users.csv
-				echo "$(date);$USER;$TYPE;CHANGED" >> /usr/lib/cgi-bin/log/user.txt
+				chmod 777 users.csv
+				echo "$(date);$USER;CHANGED" >> user.log
 				echo "alert('Usuário alterado.');"
 				echo "location.href='../index.html'"
 			fi
@@ -50,3 +59,4 @@ else
 	echo "alert('Campos não coincidem-se.');"
 	echo "location.href='../index.html'"
 fi
+echo "</script>"
